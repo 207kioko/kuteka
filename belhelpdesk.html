@@ -7,6 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <!-- PWA Manifest & Theme -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#16a34a">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+
   <style>
     .fade-in { animation: fadeIn 0.3s ease-in-out; }
     @keyframes fadeIn {
@@ -20,6 +26,14 @@
       40%, 80% { transform: translateX(5px); }
     }
   </style>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(() => console.log('✅ Service Worker Registered'))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+  </script>
 </head>
 <body class="bg-gray-100 min-h-screen">
 
@@ -136,7 +150,6 @@
         });
     });
 
-    // Toggle popup
     const popupToggle = document.getElementById("popupToggle");
     const popupModal = document.getElementById("popupModal");
     const closePopup = document.getElementById("closePopup");
